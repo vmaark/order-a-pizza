@@ -1,39 +1,49 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const Pizza = ({ onClick, toppings, maxToppings, size, basePrice }) => (
+const Pizza = ({ toppings, maxToppings, size, basePrice, price, onChange }) => (
   <div>
-    <p>{size}</p>
+    <div>{size}</div>
+    <div>{basePrice} $</div>
     <p>You can select {maxToppings} toppings!</p>
     <div className="toppings-container">
       {
         toppings.map((topping) => {
-          return (
-            <label>
-              <input
-                type="checkbox"
-                name={topping.name}
-              />
-              {topping.name}
-            </label>
-          );
+          if (topping.disabled) {
+            return (
+              <label>
+                <input
+                  type="checkbox"
+                  name={topping.name}
+                  checked={topping.selected}
+                  disabled
+                />
+                {topping.name + " " + topping.price + "$"}
+              </label>
+            );
+          }
+          else {
+            return (
+              <label>
+                <input
+                  type="checkbox"
+                  name={topping.name}
+                  checked={topping.selected}
+                  onChange={() => {onChange(topping)}}
+                />
+                {topping.name + " " + topping.price + "$"}
+              </label>
+            );
+          }
+
         })
       }
     </div>
-    <p>{calculatePizzaPrice(toppings, basePrice)} $</p>
-    <button onClick={onClick}>Add to Cart</button>
+    <p>{price} $</p>
   </div>
 );
 
-let calculatePizzaPrice = (toppings, basePrice) => {
-  const total = toppings.reduce((sum, topping) => {
-    return sum + topping.price;
-  }, basePrice);
-  return total.toFixed(2);
-}
-
 Pizza.propTypes = {
-  onClick: PropTypes.func.isRequired,
   toppings: PropTypes.array.isRequired,
   maxToppings: PropTypes.number.isRequired,
   size: PropTypes.string.isRequired,
