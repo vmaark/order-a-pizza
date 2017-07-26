@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import OrderForm from '../OrderForm';
 import * as actions from '../actions'
-import { calculatePizzaPrice, calculateTotal } from '../Helper';
 
 const mapStateToProps = (state, ownProps) => {
   return {

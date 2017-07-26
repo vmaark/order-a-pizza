@@ -8,17 +8,6 @@ import { createStore, applyMiddleware } from 'redux';
 import pizzaApp from './reducers';
 import thunkMiddleware from 'redux-thunk';
 
-let initialState = {
-  pizza: {
-    size: null,
-    toppings: [],
-    maxToppings: 0,
-    basePrice: 0,
-    price: 0
-  },
-  pizzasInCart: []
-};
-
 let store = createStore(pizzaApp, applyMiddleware(thunkMiddleware));
 
 ReactDOM.render(

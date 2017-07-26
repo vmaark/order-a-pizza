@@ -1,6 +1,5 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Pizza from './Pizza';
 import Cart from './Cart';
 import PizzaContainer from './containers/PizzaContainer';
 import { PizzaSize } from './actions';
