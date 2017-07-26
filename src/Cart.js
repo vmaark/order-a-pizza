@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { calculatePizzaPrice, calculateTotal } from './Helper';
+import RemoveButton from './containers/RemoveButton';
 
 const Cart = ({ pizzasInCart }) => (
   <div className="panel">
@@ -8,6 +9,7 @@ const Cart = ({ pizzasInCart }) => (
     <div className="toppings-container">
       {
         pizzasInCart.map((pizza) => {
+
           return (
             <div>
               <label>
@@ -23,6 +25,7 @@ const Cart = ({ pizzasInCart }) => (
                 })
               }
               <label>{calculatePizzaPrice(pizza.toppings, pizza.basePrice).toFixed(2) + " $"}</label>
+              <RemoveButton/>
             </div>
           );
         })
