@@ -15,7 +15,7 @@ const Pizza = ({ toppings, maxToppings, size, basePrice, price, onChange }) => (
                 <input
                   type="checkbox"
                   name={topping.name}
-                  checked={topping.selected}
+                  checked={topping.defaultSelected}
                   disabled
                 />
                 {topping.name + " " + topping.price + "$"}
@@ -28,7 +28,7 @@ const Pizza = ({ toppings, maxToppings, size, basePrice, price, onChange }) => (
                 <input
                   type="checkbox"
                   name={topping.name}
-                  checked={topping.selected}
+                  checked={topping.defaultSelected}
                   onChange={() => {onChange(topping)}}
                 />
                 {topping.name + " " + topping.price + "$"}
@@ -45,7 +45,7 @@ const Pizza = ({ toppings, maxToppings, size, basePrice, price, onChange }) => (
 
 Pizza.propTypes = {
   toppings: PropTypes.array.isRequired,
-  maxToppings: PropTypes.number.isRequired,
+  maxToppings: PropTypes.number,
   size: PropTypes.string.isRequired,
   basePrice: PropTypes.number.isRequired
 };

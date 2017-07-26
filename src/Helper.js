@@ -1,13 +1,13 @@
 export function calculatePizzaPrice(toppings, basePrice) {
   const total = toppings.reduce((sum, topping) => {
-    return sum + (topping.selected ? topping.price : 0);
+    return sum + (topping.defaultSelected ? topping.price : 0);
   }, basePrice);
-  return total.toFixed(2);
+  return total;
 }
 
 export function calculateTotal(pizzas) {
   const total = pizzas.reduce((sum, pizza) => {
-    return calculatePizzaPrice(pizza.toppings, pizza.basePrice);
+    return sum + calculatePizzaPrice(pizza.toppings, pizza.basePrice);
   }, 0);
   return total;
 }

@@ -5,14 +5,19 @@ import { calculatePizzaPrice } from '../Helper';
 
 const mapStateToProps = (state, ownProps) => {
   let sumOfSelectedToppings = state.pizza.toppings.reduce((sum, topping) => {
-    return sum + (topping.selected ? 1 : 0);
+    return sum + (topping.defaultSelected ? 1 : 0);
   }, 0);
   let toppings = state.pizza.toppings.map((topping) => {
+  let disabled = state.pizza.maxToppings
+    ? !topping.defaultSelected && sumOfSelectedToppings >= state.pizza.maxToppings
+      ? "disabled"
+      : ""
+    : "";
     return {
-      disabled: !topping.selected && sumOfSelectedToppings >= state.pizza.maxToppings ? "disabled" : "",
+      disabled: disabled,
       name: topping.name,
       price: topping.price,
-      selected: topping.selected
+      defaultSelected: topping.defaultSelected
     }
   });
 
@@ -21,7 +26,7 @@ const mapStateToProps = (state, ownProps) => {
     maxToppings: state.pizza.maxToppings,
     size: state.pizza.size,
     basePrice: state.pizza.basePrice,
-    price: calculatePizzaPrice(toppings, state.pizza.basePrice)
+    price: calculatePizzaPrice(toppings, state.pizza.basePrice).toFixed(2)
   };
 };
 

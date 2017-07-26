@@ -7,6 +7,7 @@ const mapStateToProps = (state, ownProps) => {
   return {
     pizza: state.pizza,
     pizzasInCart: state.pizzasInCart,
+    isFetching: state.isFetching
   };
 };
 
@@ -16,7 +17,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       dispatch(actions.addToCart(pizza))
     },
     onSelect: (size) => {
-      dispatch(actions.setSize(size))
+      dispatch(actions.fetchPizzaInfo(size))
     }
   };
 };

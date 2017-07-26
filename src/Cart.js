@@ -11,21 +11,24 @@ const Cart = ({ pizzasInCart }) => (
           return (
             <div>
               <label>
-                {pizza.size + " " + pizza.price + " $"}
+                {pizza.size + " "}
               </label>
               {
-                pizza.toppings.filter(topping => topping.selected).map((topping) => {
-                  <label>
-                    {topping.name}
-                  </label>
+                pizza.toppings.filter(topping => topping.defaultSelected).map((topping) => {
+                  return (
+                    <label>
+                      {topping.name + " "}
+                    </label>
+                  );
                 })
               }
+              <label>{calculatePizzaPrice(pizza.toppings, pizza.basePrice).toFixed(2) + " $"}</label>
             </div>
           );
         })
       }
       <label>
-        { "total: " + calculateTotal(pizzasInCart) + " $"}
+        { "total: " + calculateTotal(pizzasInCart).toFixed(2) + " $"}
       </label>
     </div>
   </div>
